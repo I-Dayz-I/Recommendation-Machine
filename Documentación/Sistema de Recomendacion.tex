@@ -1,0 +1,72 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{makeidx}
+\usepackage{graphicx}
+\usepackage{lmodern}
+\usepackage{kpfonts}
+\usepackage{fourier}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{listings}
+\author{Sistema de Recomendaciones utilizando Machine Learning}
+\title{Proyecto de Aprendizaje de Máquinas.}
+
+
+\lstset{ 
+backgroundcolor=\color{white},  % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}; should come as last argument
+basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+breaklines=true,                 % sets automatic line breaking
+captionpos=b,                    % sets the caption-position to bottom
+commentstyle=\color{mygreen},    % comment style
+deletekeywords={...},            % if you want to delete keywords from the given language
+escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+firstnumber=0,                % start line enumeration with line 1000
+  frame=single,	                   % adds a frame around the code
+keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{blue},       % keyword style
+                % the language of the code
+  morekeywords={*,...},            % if you want to add more keywords to the set
+  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{mymauve},     % string literal style
+  tabsize=1,	                   % sets default tabsize to 2 spaces
+  title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+
+\usepackage{color}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.70,0,0.82}
+
+
+
+
+\begin{document}
+\maketitle
+\begin{abstract}
+El principal problema que estamos resolviendo es diseñar un sistema de recomendación para mostrar temas de interes que puedan gustar a los usuarios y presentar amigos a personas con el mismo gusto en estos temas. Nosotros utilizaremos este sistema de recomendacion para en un futuro unirlo a la red social en la que estamos trabajando actualmente, pues se encuentra entre nuestros planes mantenerla como parte de nuestra tesis. Por tanto, el sistema sera (salvando las diferencias) : algo parecido a como twitter mantiene las recomendaciones de hashtags y usuarios, pues nuestra red social funciona a partir de etiquetas y posts. Por tanto queremos poder hacer recomendaciones de estiquetas , posts y usuarios  personalizadas a cada persona en dependencia de sus gustos , y los gustos de los que el sigue.
+\end{abstract}
+\textbf{\textit{Autores(C311):\\}}
+\textbf{Juan Marrero Valdez-Miranda\\}
+\textbf{David Campanería Cisneros\\}
+\textbf{Dayron Fernández Acosta\\}
+\newpage
+\tableofcontents
+
+\newpage
+\section*{Introducción}
+
+El diseño de un sistema de recomendación ha sido ampliamente abordado antes, por ejemplo, desde YouTube, Facebook y muchas otras aplicaciones. YouTube siempre ''adivina'' lo que les gusta ver a los clientes y muestra esos videos en la página principal de los usuarios, y también les brinda la opción de suscribirse a un canal o a un YouTuber relacionado con los videos que vio recientemente. Lo que queremos hacer es bastante similar a estas plataformas. Aunque existen métodos de recomendación en muchos trabajos anteriores para ayudar a los usuarios a tomar decisiones como seleccionar películas, música, productos ,etc..., esos sistemas no siempre se basan completamente en las preferencias de los propios usuarios. Las preferencias de otros usuarios y lo que es popular ahora también tienen un gran impacto en la recomendación.
+\end{document}
