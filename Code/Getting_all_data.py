@@ -24,7 +24,7 @@ def Get_Tweets(all_tweets):
     auth.set_access_token(OAUTH_TOKEN, OAUTH_TOKEN_SECRET)
     api = tweepy.API(auth)
 
-    for id_of_tweet in tweets_id:
+    for id_of_tweet in all_tweets:
         tweet = api.get_status(id_of_tweet)
         print(tweet.text)
     
@@ -64,4 +64,3 @@ def Create_User_GraphCSV():
     dataframe.to_csv(newfile)
     
     
-Create_User_GraphCSV()
