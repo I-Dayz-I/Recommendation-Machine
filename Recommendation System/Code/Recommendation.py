@@ -1,34 +1,17 @@
 import numpy as np
 import pandas as pd
 import os
-import pandas_profiling
-import seaborn as sns
 import matplotlib.pyplot as plt
 from scipy.sparse import csr_matrix
 from sklearn.neighbors import NearestNeighbors
-from PIL import Image
-import requests
-from io import BytesIO
-import plotly.offline as py
-from plotly.offline import init_notebook_mode, iplot
-import plotly.graph_objs as go
-import plotly.express as px
-from plotly.subplots import make_subplots
-from plotly import tools
-import plotly.figure_factory as ff
-from matplotlib import font_manager
 import networkx as nx
-import nxviz as nv
 from nxviz import CircosPlot
-from networkx.algorithms import bipartite
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.model_selection import train_test_split
 import numpy as np
 import pandas as pd
 from sklearn.cluster import KMeans
-from scipy.spatial.distance import cdist
 import matplotlib.pyplot as plt
-from sklearn.decomposition import PCA
 
 def main():
     #Getting Script Paths
