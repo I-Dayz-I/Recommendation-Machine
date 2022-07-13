@@ -21,7 +21,7 @@ def Create_Usefull_DS():
     
     #Loading User Followers Graph
     #engine = sqlalchemy.create_engine('mysql+pymysql://root:@localhost:3306/aplication')
-    
+    Getting_all_data.Get_Tweets(all_tweets)
 
 
 

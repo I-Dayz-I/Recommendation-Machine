@@ -24,10 +24,29 @@ def Get_Tweets(all_tweets):
     auth.set_access_token(OAUTH_TOKEN, OAUTH_TOKEN_SECRET)
     api = tweepy.API(auth)
 
-    for id_of_tweet in all_tweets:
-        tweet = api.get_status(id_of_tweet)
-        print(tweet.text)
+    tweets_ids = all_tweets.loc[:,"id"]
+    tweets_text = []
+    tweets_hashtags = []
+    for id_of_tweet in tweets_ids:
+        try:
+            tweet = api.get_status(id_of_tweet)
+            tweets_text.append(tweet.text)
+            hashtags = []
+            for word in tweet.text.split():
+                if word[0] == '#':
+                    hashtags.append(word)
+            tweets_hashtags.append(hashtags)
+            print(tweet.text)
+        except:
+            all_tweets.drop(all_tweets.index[all_tweets['id'] == id_of_tweet], inplace=True)
     
+    
+    all_tweets['tweet_text'] = tweets_text
+    all_tweets['hastags'] = tweets_hashtags
+    newfile = os.path.join(os.path.dirname(__file__), '..','Dataset','link_status_search_with_ordering_filterd.csv')
+    all_tweets.to_csv(newfile)
+    
+    print(all_tweets)
     
     
 def Create_User_GraphCSV():

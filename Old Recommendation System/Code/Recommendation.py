@@ -62,8 +62,22 @@ def main():
     #PlottingExamples(all_in_one)
     #CreatingGraphOfNetwork(all_in_one)
     
-    K_MeansClustering(all_in_one)
+    #K_MeansClustering(all_in_one)
     #print(all_in_one)
+    
+    clean = CleanningData(books, users, score)
+    print("100 BOOKS SAMPLE:")
+    list1=list(clean['book_name'])
+    setlist = set(list1)
+    print(setlist)
+    bname = 'X'
+    while bname not in setlist:
+        print("SELECT 1 BOOK:")
+        bname = input()
+    
+    
+    KNN(clean,bname)
+    
     
     
     
@@ -247,23 +261,53 @@ def K_MeansClustering(All_in_one):
     plt.title('Selecting k with the Elbow Method')
     plt.show() 
 
-main()
 
-
-# def KNN(score, users, books, name):
-#     score.rename(columns={'User-ID':'user_id','ISBN':'ISBN','Book-Rating':'book-rating'},inplace=True)
-#     x = score['user_id'].value_counts()>30
-#     merged = score.merge(books, on = 'ISBN')
-#     merged_groupby=merged.groupby('book_name')['book-rating'].count().reset_index()
-#     merged_groupby.rename(columns={'book-rating':'number_of_ratings'},inplace=True)
-#     integrated_merged=merged.merge(merged_groupby, on='book_name')
-#     integrated_merged.drop_duplicates(['user_id','book_name'],inplace=True)
+def CleanningData(books, users , scores):
+    books.drop(['Image-URL-S','Image-URL-M','Image-URL-L'],axis=1,inplace=True)
+    books.rename(columns={'Book-Title':'book_name','Book-Author':'author','Year-Of-Publication':'year','Publisher':'publisher'},inplace=True)
+    users.rename(columns={'User-ID':'user_id','Location':'location','Age':'age'},inplace=True)
+    scores.rename(columns={'User-ID':'user_id','ISBN':'ISBN','Book-Rating':'book-rating'},inplace=True)
+    #users who have reviewed more than 30 books (frequent users)
+    x = scores['user_id'].value_counts()>30
+    #Getting raitngs of those users
+    index1 = x.index
+    scores = scores[scores['user_id'].isin(index1)]
+    merged = scores.merge(books, on = 'ISBN')
+    merged_groupby=merged.groupby('book_name')['book-rating'].count().reset_index()
+    merged_groupby.rename(columns={'book-rating':'number_of_ratings'},inplace=True)
+    merged_groupby=merged_groupby[merged_groupby['number_of_ratings']>30]
+    merged_groupby.head()
+    integrated_merged=merged.merge(merged_groupby, on='book_name')
+    integrated_merged.drop_duplicates(['user_id','book_name'],inplace=True)
     
-#     pivot=pd.pivot_table(integrated_merged, columns='user_id',index='book_name',fill_value=0,values='book-rating')
-#     pivot_csr=csr_matrix(pivot)
-#     distances,suggestions=model.kneighbors(pivot.iloc[55,:].values.reshape(1,-1))
+    return integrated_merged
+    
+    
+    
+    
+    
+    
+    
+    
+def KNN(score_table, book_name):
+    pivot=pd.pivot_table(score_table, columns='user_id',index='book_name',fill_value=0,values='book-rating')
+    pivot_csr=csr_matrix(pivot)
+    model=NearestNeighbors(algorithm='brute')
+    model.fit(pivot_csr)
+    
+    book_id = np.where(pivot.index == book_name)[0][0]
+    distances, recommendations = model.kneighbors(pivot.iloc[book_id,:].values.reshape(1,-1))
+    for i in range(len(recommendations)):
+        if i == 0:
+            print(f"For book \"{book_name}\" we would recommend the following:")
+        if not i:
+            list2=pivot.index[recommendations[i]]
+            for j in range(len(list2)):
+                print(list2[j])
 
 
+
+main()
 
 
 
